@@ -6,6 +6,7 @@ export async function fetchData() {
     const response = await fetch(API);
     const text = await response.text();
     resp = format(text.trim().split("\n"));
+    resp.sort((a, b) => parseInt(a.label) - parseInt(b.label));
   } catch (e) {
     console.error(e);
   }
