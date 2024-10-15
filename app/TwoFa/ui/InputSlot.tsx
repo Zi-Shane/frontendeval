@@ -1,25 +1,30 @@
 import { useRef } from "react";
-import useUpdate from "../useUpdate";
-import { InputBoxState } from "../type";
+import useUpdate from "../hooks/useUpdate";
 
-function InputBox({
+function InputSlot({
   maxLength = 1,
   index,
+  position,
+  setPosition,
   inputValues,
   setInputValues,
 }: {
   maxLength?: number;
   index: number;
-  inputValues: InputBoxState;
-  setInputValues: React.Dispatch<React.SetStateAction<InputBoxState>>;
+  position: number;
+  setPosition: React.Dispatch<React.SetStateAction<number>>;
+  inputValues: string[];
+  setInputValues: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [handleFocus, handleKeyDown, handleChange] = useUpdate({
+  const [handleFocus, handleKeyDown, handleChange, handlePaste] = useUpdate({
     index,
     maxLength,
     inputRef,
     inputValues,
     setInputValues,
+    position,
+    setPosition,
   });
 
   return (
@@ -27,13 +32,14 @@ function InputBox({
       ref={inputRef}
       type="text"
       maxLength={maxLength}
-      value={inputValues.values[index]}
+      value={inputValues[index]}
       onChange={(e) => handleChange(e)}
       onFocus={handleFocus}
       onKeyDown={(e) => handleKeyDown(e)}
+      onPaste={(e) => handlePaste(e)}
       className="border rounded-sm p-2 h-10 w-10 text-center"
     />
   );
 }
 
-export default InputBox;
+export default InputSlot;

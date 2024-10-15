@@ -1,5 +1,5 @@
 import React from "react";
-import InputBox from "./InputBox";
+import InputBox from "./InputBox_old";
 
 function InputBoxList({ length }: { length: number }) {
   return (
