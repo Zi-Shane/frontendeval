@@ -2,40 +2,36 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 function FormBlock({
-  answer,
-  setAnswer,
-  pageName,
+  updateForm,
+  formData,
   isLast,
   forward,
 }: {
-  answer: Map<string, string>;
-  setAnswer: React.Dispatch<React.SetStateAction<Map<string, string>>>;
-  pageName: string;
+  updateForm: updateFormFunc;
+  formData: FormObj;
   isLast: boolean;
   forward: () => void;
 }) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setAnswer((prev) => {
-      const newAns = new Map(prev);
-      newAns.set(pageName, e.target.value);
-      return newAns;
-    });
+    const newFormData = { ...formData, value: e.target.value };
+    updateForm(newFormData);
   }
 
   return (
     <div className="w-fit m-auto my-28">
-      <p className="font-medium mb-4">{pageName}</p>
       <div>
+        <p className="font-medium mb-4">{formData.title}</p>
         <Input
           className="w-80 mb-2"
           type="text"
-          placeholder={pageName}
-          value={answer.get(pageName)}
+          placeholder={formData.title}
+          value={formData.value}
           onChange={(e) => handleChange(e)}
         />
-        <p className="mb-5 text-sm text-gray-600">
-          This is your public display name.
+        <p className="leading-6 min-h-6 mb-5 text-sm text-gray-600">
+          {formData.description}
         </p>
+
         <Button className="w-20" onClick={forward}>
           {isLast ? "submit" : "next"}
         </Button>
