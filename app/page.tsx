@@ -13,6 +13,7 @@ export default function Home() {
               discription={v.description}
               path={v.path}
               difficulty={v.difficulty}
+              isFinished={v.finished}
             />
           );
         })}
