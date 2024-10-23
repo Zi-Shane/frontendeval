@@ -1,42 +1,28 @@
-import { useRef } from "react";
-import useUpdate from "../hooks/useUpdate";
-
 function InputSlot({
-  maxLength = 1,
-  index,
-  position,
-  setPosition,
-  inputValues,
-  setInputValues,
+  addRef,
+  value,
+  handleChange,
+  handleKeyDown,
+  handleFocus,
+  handlePaste,
 }: {
-  maxLength?: number;
-  index: number;
-  position: number;
-  setPosition: React.Dispatch<React.SetStateAction<number>>;
-  inputValues: string[];
-  setInputValues: React.Dispatch<React.SetStateAction<string[]>>;
+  addRef: (ref: HTMLInputElement | null) => void;
+  value: string;
+  handleChange: (value: string) => void;
+  handleKeyDown: (value: string) => void;
+  handleFocus: () => void;
+  handlePaste: (data: string) => void;
 }) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [handleFocus, handleKeyDown, handleChange, handlePaste] = useUpdate({
-    index,
-    maxLength,
-    inputRef,
-    inputValues,
-    setInputValues,
-    position,
-    setPosition,
-  });
-
   return (
     <input
-      ref={inputRef}
+      ref={addRef}
       type="text"
-      maxLength={maxLength}
-      value={inputValues[index]}
-      onChange={(e) => handleChange(e)}
-      onFocus={handleFocus}
-      onKeyDown={(e) => handleKeyDown(e)}
-      onPaste={(e) => handlePaste(e)}
+      maxLength={1}
+      value={value}
+      onChange={(e) => handleChange(e.target.value)}
+      onKeyDown={(e) => handleKeyDown(e.key)}
+      onFocus={() => handleFocus()}
+      onPaste={(e) => handlePaste(e.clipboardData.getData("Text"))}
       className="border rounded-sm p-2 h-10 w-10 text-center"
     />
   );

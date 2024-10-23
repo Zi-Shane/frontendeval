@@ -1,20 +1,19 @@
 import { useState } from "react";
 import { ValidStatus } from "../type";
 
-function usePinCode(pinLength: number) {
-  const [values, setValues] = useState(Array(pinLength).fill(""));
+function useOtp(maxLength: number) {
+  const [values, setValues] = useState("");
   const [hasSpace, setHasSpace] = useState(false);
   const [isValid, setIsValid] = useState(ValidStatus.unset);
 
-  const sendPinCode = () => {
+  function sendOtpCode() {
     setHasSpace(false);
     setIsValid(ValidStatus.unset);
-    const valueStr = values.join("");
-    if (valueStr.length === pinLength) {
-      console.log(`Send PinCode: { pin: ${valueStr} }`);
 
+    if (values.length === maxLength) {
+      console.log(`Send pin-code to server: { pin: ${values} }`);
       // fake response
-      if (valueStr === "1234") {
+      if (values === "1234") {
         setIsValid(ValidStatus.true);
       } else {
         setIsValid(ValidStatus.false);
@@ -22,9 +21,13 @@ function usePinCode(pinLength: number) {
     } else {
       setHasSpace(true);
     }
-  };
+  }
 
-  return [values, setValues, sendPinCode, hasSpace, isValid] as const;
+  function updateValue(newValue: string) {
+    setValues(newValue);
+  }
+
+  return [values, updateValue, sendOtpCode, hasSpace, isValid] as const;
 }
 
-export default usePinCode;
+export default useOtp;
