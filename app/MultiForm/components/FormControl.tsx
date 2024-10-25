@@ -3,6 +3,7 @@ import BackBtn from "../ui/BackBtn";
 import FormBlock from "../ui/FormBlock";
 import Success from "./Success";
 import { initFormSetting } from "../utils";
+import { FormObj } from "../type";
 
 function FormControl() {
   const [formObjList, setFormObjList] = useState(() => initFormSetting());
@@ -12,7 +13,10 @@ function FormControl() {
   const lastPageNo = formObjList.length - 1;
 
   function handleSubmit() {
-    console.log(formObjList);
+    const res = formObjList.map((v) => {
+      return { title: v.title, value: v.value };
+    });
+    console.log(JSON.stringify(res));
     setIsSubmit(true);
   }
 

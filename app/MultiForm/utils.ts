@@ -1,4 +1,5 @@
 import { settings } from "@/data/MultiForm";
+import { FormObj } from "./type";
 
 export function initFormSetting(): FormObj[] {
   const form = settings.map(({ title, description }) => {
