@@ -21,7 +21,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function BarChartBlock({ data }: { data: Array<ChartData> }) {
+function Chart({ data }: { data: Array<ChartData> }) {
   return (
     <ChartContainer config={chartConfig}>
       <BarChart
@@ -55,3 +55,5 @@ export function BarChartBlock({ data }: { data: Array<ChartData> }) {
     </ChartContainer>
   );
 }
+
+export default Chart;

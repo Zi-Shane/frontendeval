@@ -1,33 +1,23 @@
 "use client";
 
-import { BarChartBlock } from "./ui/BarChartBlock";
-import { Button } from "@/components/ui/button";
-import useChartData from "./hooks/useChartData";
+import ChartControl from "./components/ChartControl";
+import Description from "./components/DescriptionBlock";
+import { DemoTab } from "../components/DemoTab";
+
+const categories = [
+  {
+    name: "Demo",
+    content: (
+      <div className="h-full flex justify-center items-center">
+        <ChartControl />
+      </div>
+    ),
+  },
+  { name: "Description", content: <Description /> },
+];
 
 function BarChartPage() {
-  const { isLoading, data, getChartData } = useChartData();
-
-  return (
-    <div className="m-10">
-      <div className="w-full flex justify-center">
-        <div className="lg:w-3/5 w-full">
-          <div className="mb-5">
-            <BarChartBlock data={data} />
-          </div>
-          <div className="flex justify-end">
-            <Button
-              className="w-[6rem] h-[2.5rem]"
-              variant="outline"
-              onClick={() => getChartData()}
-              disabled={isLoading}
-            >
-              {isLoading ? "Loading..." : "Reload"}
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <DemoTab categories={categories} />;
 }
 
 export default BarChartPage;

@@ -6,6 +6,11 @@ export type ChartData = {
   value: number;
 };
 
+export const DescriptionList = [
+  "A button to refetch/regenerate the data.",
+  "ReactQuery to cache fetched data, only update when click Reload button.",
+];
+
 // example
 export const ChartData = [
   { label: "A", value: 30 },

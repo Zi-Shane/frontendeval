@@ -9,13 +9,13 @@ function BackBtn({
   backward: () => void;
 }) {
   return (
-    <Button
-      variant="ghost"
-      className={`${isFirst ? "invisible" : ""}`}
-      onClick={backward}
-    >
-      {isFirst ? null : <ChevronLeft className="h-4 w-4" />}
-    </Button>
+    <div className="h-4 w-4">
+      {isFirst ? null : (
+        <Button variant="ghost" onClick={backward}>
+          <ChevronLeft />
+        </Button>
+      )}
+    </div>
   );
 }
 

@@ -1,59 +1,36 @@
-import { useState } from "react";
-import BackBtn from "../ui/BackBtn";
-import FormBlock from "../ui/FormBlock";
+import FormBlock from "./FormBlock";
 import Success from "./Success";
+import BackBtn from "./BackBtn";
+import useMultiFormControl from "../hooks/useMultiFormControl";
 import { initFormSetting } from "../utils";
-import { FormObj } from "../type";
 
 function FormControl() {
-  const [formObjList, setFormObjList] = useState(() => initFormSetting());
-  const [pageNo, setPageNo] = useState(0);
-  const [isSubmit, setIsSubmit] = useState(false);
-  const startPageNo = 0;
-  const lastPageNo = formObjList.length - 1;
-
-  function handleSubmit() {
-    const res = formObjList.map((v) => {
-      return { title: v.title, value: v.value };
-    });
-    console.log(JSON.stringify(res));
-    setIsSubmit(true);
-  }
-
-  function forward() {
-    setPageNo((prev) => (pageNo === lastPageNo ? prev : prev + 1));
-
-    if (pageNo === lastPageNo) {
-      handleSubmit();
-      setFormObjList(() => initFormSetting());
-      setPageNo(0);
-    }
-  }
-
-  function backward() {
-    setPageNo((prev) => (pageNo === startPageNo ? startPageNo : prev - 1));
-  }
-
-  function updateForm(newFormData: FormObj) {
-    const newAns = [...formObjList];
-    newAns[pageNo] = newFormData;
-    setFormObjList(newAns);
-  }
+  const initialForm = initFormSetting();
+  const [
+    forward,
+    backward,
+    handleFormUpdate,
+    formObjList,
+    pageNo,
+    isSubmit,
+    startPageNo,
+    lastPageNo,
+  ] = useMultiFormControl(initialForm);
 
   return (
-    <div className="w-1/2 rounded-lg border bg-card text-card-foreground shadow-sm">
+    <div className="rounded-lg border bg-card text-card-foreground shadow-sm w-[350px] h-[450px]">
       {isSubmit ? (
         <Success />
       ) : (
-        <div>
+        <>
           <BackBtn isFirst={pageNo === startPageNo} backward={backward} />
           <FormBlock
-            updateForm={updateForm}
+            onFormUpdate={handleFormUpdate}
             formData={formObjList[pageNo]}
             isLast={pageNo === lastPageNo}
             forward={forward}
           />
-        </div>
+        </>
       )}
     </div>
   );

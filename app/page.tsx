@@ -1,5 +1,5 @@
 import { ProjectList } from "@/data/HomePage";
-import Card from "./ui/Card";
+import ProjectCard from "./components/ProjectCard";
 
 export default function Home() {
   return (
@@ -7,7 +7,7 @@ export default function Home() {
       <div className="grid grid-cols-12 gap-4">
         {ProjectList.map((v, k) => {
           return (
-            <Card
+            <ProjectCard
               key={k}
               title={v.title}
               discription={v.description}
