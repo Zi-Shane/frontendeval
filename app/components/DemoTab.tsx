@@ -20,23 +20,25 @@ export function DemoTab({
       <Tabs defaultValue="Demo">
         <TabsList className="lg:w-fit w-full">
           {categories.map((category, index) => (
-            <TabsTrigger className="w-full" key={index} value={category.name}>
+            <TabsTrigger
+              className="w-full"
+              key={`tab-${index}`}
+              value={category.name}
+            >
               {category.name}
             </TabsTrigger>
           ))}
         </TabsList>
         <div className="lg:border-t border-slate-200 border-t-0"></div>
-        <div>
-          {categories.map((category, index) => (
-            <TabsContent
-              key={index}
-              value={category.name}
-              className={cn("w-[300px] lg:w-[60vw] h-[540px]", cardClassName)}
-            >
-              {category.content}
-            </TabsContent>
-          ))}
-        </div>
+        {categories.map((category, index) => (
+          <TabsContent
+            key={`content-${index}`}
+            value={category.name}
+            className={cn("w-[300px] lg:w-[60vw] h-[540px]", cardClassName)}
+          >
+            {category.content}
+          </TabsContent>
+        ))}
       </Tabs>
     </div>
   );

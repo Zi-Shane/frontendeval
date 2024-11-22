@@ -4,8 +4,16 @@ import { ChartData } from "@/data/BarChartData";
 import { fetchData } from "../utils";
 
 function useChartData() {
-  const [data, setData] = useState<Array<ChartData>>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // Info: Tab siwtch will cause unmount
+  const storedData = localStorage.getItem("chartData");
+  const [data, setData] = useState<Array<ChartData>>(() => {
+    if (storedData) {
+      return JSON.parse(storedData);
+    } else {
+      return null;
+    }
+  });
+  const [isLoading, setIsLoading] = useState(storedData ? false : true);
 
   const getChartData = useCallback(async () => {
     setIsLoading(true);
@@ -14,9 +22,17 @@ function useChartData() {
     setIsLoading(false);
   }, []);
 
+  // Load data from localStorage on component mount
   useEffect(() => {
-    getChartData();
-  }, [getChartData]);
+    if (!storedData) {
+      getChartData();
+    }
+  }, [getChartData, storedData]);
+
+  // Update localStorage whenever data change
+  useEffect(() => {
+    localStorage.setItem("chartData", JSON.stringify(data));
+  }, [data]);
 
   return { isLoading, data, getChartData };
 }

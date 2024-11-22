@@ -8,7 +8,7 @@ export type ChartData = {
 
 export const DescriptionList = [
   "A button to refetch/regenerate the data.",
-  "ReactQuery to cache fetched data, only update when click Reload button.",
+  "Cache fetched data, only update when click Reload button.",
 ];
 
 // example

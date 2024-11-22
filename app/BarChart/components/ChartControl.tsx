@@ -1,14 +1,12 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import Chart from "./Chart";
 import useChartData from "../hooks/useChartData";
 
-function BarChartPage() {
+function BarChartControl() {
   const { isLoading, data, getChartData } = useChartData();
 
   return (
-    <div className="w-[900px]">
+    <div className="w-full">
       <Chart data={data} />
       <div className="flex justify-end">
         <Button
@@ -24,4 +22,4 @@ function BarChartPage() {
   );
 }
 
-export default BarChartPage;
+export default BarChartControl;
