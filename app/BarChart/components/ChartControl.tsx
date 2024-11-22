@@ -7,7 +7,7 @@ function BarChartControl() {
 
   return (
     <div className="w-full">
-      <Chart data={data} />
+      <Chart data={data ?? []} />
       <div className="flex justify-end">
         <Button
           className="w-[6rem] h-[2.5rem]"
