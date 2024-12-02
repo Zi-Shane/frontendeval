@@ -45,8 +45,8 @@ function OtpForm({
           isValid === ValidStatus.false
             ? ERROE_UNMATCH
             : hasSpace
-            ? ERROE_SPACE
-            : ""
+              ? ERROE_SPACE
+              : ""
         }
         color="text-red-600"
       />

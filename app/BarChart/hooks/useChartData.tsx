@@ -5,37 +5,34 @@ import { useCallback, useEffect, useState } from "react";
 import { ChartData } from "@/data/BarChartData";
 import { fetchData } from "../utils";
 
-// Info: Tab siwtch will cause unmount & next.js pre-render issue with localstorage
+// Info: Tab siwtch will cause unmount
 function useChartData() {
   const [data, setData] = useState<Array<ChartData>>();
   const [isLoading, setIsLoading] = useState(true);
-
-  const getChartData = useCallback(async () => {
+  const updateChartData = useCallback(async () => {
     setIsLoading(true);
     const resp = await fetchData();
     setData(resp);
     setIsLoading(false);
   }, []);
 
-  // Initial states & Load data from localStorage on component mount
   useEffect(() => {
-    const storedData = localStorage.getItem("chartData");
+    const storedData = sessionStorage.getItem("chartData");
     if (storedData) {
       setData(JSON.parse(storedData));
-      setIsLoading(false);
+      setIsLoading(false); // server pre-render is true
     } else {
-      getChartData();
+      updateChartData();
     }
-  }, [getChartData]);
+  }, [updateChartData]);
 
-  // Update localStorage whenever data change
   useEffect(() => {
     if (data) {
-      localStorage.setItem("chartData", JSON.stringify(data));
+      sessionStorage.setItem("chartData", JSON.stringify(data));
     }
   }, [data]);
 
-  return { isLoading, data, getChartData };
+  return { isLoading, data, updateChartData };
 }
 
 export default useChartData;

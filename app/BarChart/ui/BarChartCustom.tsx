@@ -8,7 +8,7 @@ const BarChartCustom = ({ data }: { data: Array<ChartData> }) => {
   const maxValue = Math.max(...data.map((item) => item.value));
   const yAxisLabels = Array.from(
     { length: Math.ceil(maxValue / 10) + 1 },
-    (_, i) => i * 10
+    (_, i) => i * 10,
   );
 
   return (

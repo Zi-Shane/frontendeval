@@ -3,7 +3,7 @@ import Chart from "./Chart";
 import useChartData from "../hooks/useChartData";
 
 function BarChartControl() {
-  const { isLoading, data, getChartData } = useChartData();
+  const { isLoading, data, updateChartData } = useChartData();
 
   return (
     <div className="w-full">
@@ -12,7 +12,7 @@ function BarChartControl() {
         <Button
           className="w-[6rem] h-[2.5rem]"
           variant="outline"
-          onClick={() => getChartData()}
+          onClick={() => updateChartData()}
           disabled={isLoading}
         >
           {isLoading ? "Loading..." : "Reload"}
