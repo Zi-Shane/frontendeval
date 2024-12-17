@@ -5,7 +5,7 @@ export const ProjectList = [
     title: "Data fetching and visualization",
     description: "Build a histogram chart from a list of randomly-generated",
     path: path + "/BarChart",
-    difficulty: "easy",
+    difficulty: "medium",
     finished: true,
   },
   {
@@ -20,6 +20,20 @@ export const ProjectList = [
     description: "Create a single submittable form that spans multiple screens",
     path: path + "/MultiForm",
     difficulty: "medium",
+    finished: true,
+  },
+  {
+    title: "Shopping list",
+    description: "Create a shopping list app with autocomplete item entry",
+    path: "https://zi-shane.github.io/shopping-list/",
+    difficulty: "medium",
+    finished: true,
+  },
+  {
+    title: "Countdown timer",
+    description: "Create a countdown timer that notifies the user",
+    path: "https://zi-shane.github.io/web-timer/",
+    difficulty: "easy",
     finished: true,
   },
   {

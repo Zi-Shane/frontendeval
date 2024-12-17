@@ -1,4 +1,4 @@
-import React from "react";
+import Image from "next/image";
 
 function Card({
   title,
@@ -25,7 +25,16 @@ function Card({
             <p className="h-16 font-normal text-md text-gray-700 relative z-10 my-4">
               {discription}
             </p>
-            <p className="min-h-4 text-md">{difficulty}</p>
+            <div className="flex gap-1 items-center">
+              <Image
+                height={16}
+                width={16}
+                src={`/${difficulty}.svg`}
+                alt={difficulty}
+              ></Image>
+              <div className="">·</div>
+              <div className="min-h-4 text-sm">{difficulty}</div>
+            </div>
           </div>
         </div>
       </div>
