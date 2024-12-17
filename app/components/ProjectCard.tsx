@@ -1,3 +1,4 @@
+import { BasePath } from "@/data/HomePage";
 import Image from "next/image";
 
 function Card({
@@ -29,7 +30,7 @@ function Card({
               <Image
                 height={16}
                 width={16}
-                src={`/${difficulty}.svg`}
+                src={`${BasePath}/${difficulty}.svg`}
                 alt={difficulty}
               ></Image>
               <div className="">·</div>
